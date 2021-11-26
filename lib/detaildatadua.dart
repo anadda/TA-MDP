@@ -124,7 +124,7 @@ class DuaDetail {
 
 Future<List<DuaDetail>> fetchDetails() async {
   String api =
-      'http://data.bandung.go.id/beta/index.php/portal/api/73acec39-5f9e-4ebe-bb18-04281b308be4';
+      'http://data.bandung.go.id/beta/index.php/portal/api/fdb311ce-28ea-45b1-be6e-de98406403f7';
   final response = await http.get(
     Uri.parse(api),
     // headers: headers,
@@ -139,6 +139,6 @@ Future<List<DuaDetail>> fetchDetails() async {
 
     return driversShows;
   } else {
-    throw Exception('Failed to load drivers');
+    throw Exception('Failed to load');
   }
 }
