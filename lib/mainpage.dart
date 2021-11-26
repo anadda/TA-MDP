@@ -51,7 +51,7 @@ class _MainPageState extends State<MainPage> {
             icon: Icons.local_hospital,
           ),
           CustomBottomBarItems(
-            label: 'Account',
+            label: 'Information',
             icon: Icons.account_box_outlined,
           ),
         ],
