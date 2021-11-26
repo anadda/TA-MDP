@@ -37,10 +37,45 @@ class Profile extends StatelessWidget {
                 height: 4,
               ),
               Text('21120119130035'),
+              Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FlatButton(
+                  onPressed: (){
+                  },
+                  shape:  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(80.0),
+                  ),
+                  child: Ink(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [Colors.pink,Colors.redAccent]
+                      ),
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    child: Container(
+                      constraints: BoxConstraints(maxWidth: 100.0,maxHeight: 40.0,),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Data Covid",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.0,
+                            letterSpacing: 2.0,
+                            fontWeight: FontWeight.w300
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
             ],
           ),
-        ),
+            ]
+            ),
       ),
+    )
     );
   }
 }
