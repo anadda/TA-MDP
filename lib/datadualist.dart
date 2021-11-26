@@ -121,23 +121,12 @@ class DataDua {
   factory DataDua.fromJson(Map<String, dynamic> json) {
     return DataDua(
       uuid: json['bulan'],
-      // name: json['circuitName'],
-      // image: json['logo'],
-      // president: json['president'],
-
-      // rating: json['rating'],
     );
   }
 }
 
 // function untuk fetch api
 Future<List<DataDua>> fetchDataSatuList() async {
-  // var headers = {
-  //   "content-type": "application/json",
-  //   'x-rapidapi-host': 'api-formula-1.p.rapidapi.com',
-  //   'x-rapidapi-key': 'cf5aae3f2dmshcd438ec09b4c502p162dbfjsn5f4c66d38bea',
-  // };
-  // var header = ("Access-Control-Allow-Origin: *");
   String api =
       'http://data.bandung.go.id/beta/index.php/portal/api/fdb311ce-28ea-45b1-be6e-de98406403f7';
   final response = await http.get(
@@ -153,6 +142,6 @@ Future<List<DataDua>> fetchDataSatuList() async {
 
     return driversShows;
   } else {
-    throw Exception('Failed to load drivers');
+    throw Exception('Failed to load');
   }
 }
