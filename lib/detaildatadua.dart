@@ -21,7 +21,7 @@ class _DetailDataDuaState extends State<DetailDataDua> {
   @override
   void initState() {
     super.initState();
-    detail = fetchDetails();
+    detail = fetchDetails(widget.item);
   }
 
   @override
@@ -33,7 +33,7 @@ class _DetailDataDuaState extends State<DetailDataDua> {
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xff1F1D2B),
         title: Text(
-          'Details 2016',
+          'Details Covid per Provinsi',
           style:
               TextStyle(color: Colors.white, letterSpacing: .5, fontSize: 15),
           overflow: TextOverflow.ellipsis,
@@ -63,24 +63,27 @@ class _DetailDataDuaState extends State<DetailDataDua> {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            // Text("Year = " + snapshot.data[index].uuid),
+                            Text("Provinsi = " + snapshot.data[index].uuid),
                             SizedBox(
                               height: 4,
                             ),
-                            Text("a = " + snapshot.data[index].a.toString()),
+                            Text(
+                                "Kasus = " + snapshot.data[index].a.toString()),
                             SizedBox(
                               height: 4,
                             ),
-                            Text("b = " + snapshot.data[index].b.toString()),
+                            Text("Sembuh = " +
+                                snapshot.data[index].b.toString()),
                             SizedBox(
                               height: 4,
                             ),
-                            Text("o = " + snapshot.data[index].o.toString()),
+                            Text("Meninggal = " +
+                                snapshot.data[index].o.toString()),
                             SizedBox(
                               height: 4,
                             ),
-                            Text("total = " +
-                                snapshot.data[index].total.toString()),
+                            Text("Dirawat = " +
+                                snapshot.data[index].c.toString()),
                           ],
                         ),
                       )),
@@ -107,24 +110,29 @@ class DuaDetail {
   int b;
   int c;
   int o;
-  int total;
 
-  DuaDetail({this.uuid, this.a, this.b, this.o, this.total});
+  DuaDetail({
+    this.uuid,
+    this.a,
+    this.b,
+    this.o,
+    this.c,
+  });
 
   factory DuaDetail.fromJson(json) {
     return DuaDetail(
-      a: json['a'],
-      uuid: json['bulan'],
-      b: json['b'],
-      o: json['o'],
-      total: json['total'],
+      a: json['kasus'],
+      uuid: json['provinsi'],
+      b: json['sembuh'],
+      o: json['meninggal'],
+      c: json['dirawat'],
     );
   }
 }
 
-Future<List<DuaDetail>> fetchDetails() async {
+Future<List<DuaDetail>> fetchDetails(uuid) async {
   String api =
-      'http://data.bandung.go.id/beta/index.php/portal/api/fdb311ce-28ea-45b1-be6e-de98406403f7';
+      'https://apicovid19indonesia-v2.vercel.app/api/indonesia/provinsi?name=$uuid';
   final response = await http.get(
     Uri.parse(api),
     // headers: headers,
@@ -133,12 +141,12 @@ Future<List<DuaDetail>> fetchDetails() async {
   if (response.statusCode == 200) {
     print(response.body);
     print(response.statusCode);
-    var driversShowsJson = jsonDecode(response.body)['data'] as List,
+    var driversShowsJson = jsonDecode(response.body) as List,
         driversShows =
             driversShowsJson.map((top) => DuaDetail.fromJson(top)).toList();
 
     return driversShows;
   } else {
-    throw Exception('Failed to load');
+    throw Exception('Failed to load drivers');
   }
 }
