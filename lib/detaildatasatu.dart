@@ -139,6 +139,6 @@ Future<List<SatuDetail>> fetchDetails() async {
 
     return driversShows;
   } else {
-    throw Exception('Failed to load');
+    throw Exception('Failed to load drivers');
   }
 }
