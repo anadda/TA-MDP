@@ -31,7 +31,7 @@ class _DataDuaListState extends State<DataDuaList> {
                   height: 10,
                 ),
                 Text(
-                  '2016',
+                  'Covids',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 10),
@@ -120,15 +120,26 @@ class DataDua {
 
   factory DataDua.fromJson(Map<String, dynamic> json) {
     return DataDua(
-      uuid: json['bulan'],
+      uuid: json['provinsi'],
+      // name: json['circuitName'],
+      // image: json['logo'],
+      // president: json['president'],
+
+      // rating: json['rating'],
     );
   }
 }
 
 // function untuk fetch api
 Future<List<DataDua>> fetchDataSatuList() async {
+  // var headers = {
+  //   "content-type": "application/json",
+  //   'x-rapidapi-host': 'api-formula-1.p.rapidapi.com',
+  //   'x-rapidapi-key': 'cf5aae3f2dmshcd438ec09b4c502p162dbfjsn5f4c66d38bea',
+  // };
+  // var header = ("Access-Control-Allow-Origin: *");
   String api =
-      'http://data.bandung.go.id/beta/index.php/portal/api/fdb311ce-28ea-45b1-be6e-de98406403f7';
+      'https://apicovid19indonesia-v2.vercel.app/api/indonesia/provinsi';
   final response = await http.get(
     Uri.parse(api),
   );
@@ -136,12 +147,12 @@ Future<List<DataDua>> fetchDataSatuList() async {
   if (response.statusCode == 200) {
     print(response.body);
     print(response.statusCode);
-    var driversShowsJson = jsonDecode(response.body)['data'] as List,
+    var driversShowsJson = jsonDecode(response.body) as List,
         driversShows =
             driversShowsJson.map((top) => DataDua.fromJson(top)).toList();
 
     return driversShows;
   } else {
-    throw Exception('Failed to load');
+    throw Exception('Failed to load drivers');
   }
 }
