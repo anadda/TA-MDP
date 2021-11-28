@@ -47,11 +47,11 @@ class _MainPageState extends State<MainPage> {
             icon: Icons.local_hospital,
           ),
           CustomBottomBarItems(
-            label: '2016',
+            label: 'Covid',
             icon: Icons.local_hospital,
           ),
           CustomBottomBarItems(
-            label: 'Information',
+            label: 'Account',
             icon: Icons.account_box_outlined,
           ),
         ],
